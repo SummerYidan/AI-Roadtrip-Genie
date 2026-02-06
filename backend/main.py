@@ -17,7 +17,7 @@ ALLOWED_ORIGINS = [
     "http://localhost:3001",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-    # "https://your-app.vercel.app",
+    "https://ai-roadtrip-genie.vercel.app/",
 ]
 
 
