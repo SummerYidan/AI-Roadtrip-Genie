@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+venv/
+.Python
+*.egg-info/
+
+# Build output
+.next/
+out/
+build/
+dist/
+*.pyc
+*.pyo
+__pycache__/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+*.so
+.pytest_cache/
+.coverage
+.tox/
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# PDF output
+output/
+*.pdf
+
+# Runtime
+*.pid
+
+# Test artifacts
+backend/test_*.json
+backend/schema_test_result.json
+
+# Package lock (keep frontend's)
+# package-lock.json is kept for reproducible builds

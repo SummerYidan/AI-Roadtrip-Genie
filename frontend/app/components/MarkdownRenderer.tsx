@@ -6,10 +6,10 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   if (!content) {
-    return <div className="markdown-content text-off-white/50">暂无内容</div>
+    return <div className="markdown-content text-off-white/50">No content available</div>
   }
 
-  // 临时使用纯文本显示,确保页面能正常加载
+  // Plain text display as fallback to ensure page loads correctly
   return (
     <div className="markdown-content whitespace-pre-wrap">
       {content}

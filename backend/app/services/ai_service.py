@@ -92,7 +92,8 @@ class AIService:
                 },
                 "interest_highlights": {
                     "type": "array",
-                    "description": "Expert tips for selected interests. MUST have at least 1 entry.",
+                    "description": "Expert tips for selected interests. Must have at least 1 entry. If no interests selected, generate one for 'general'.",
+                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "properties": {
@@ -289,6 +290,13 @@ class AIService:
                     else:
                         raise ValueError(f"All JSON repair failed: {e2}")
 
+            # Ensure interest_highlights is never empty (prevents 400 schema errors)
+            if not data.get("interest_highlights"):
+                fallback_category = user_interests[0] if user_interests else "general"
+                data["interest_highlights"] = [
+                    {"category": fallback_category, "advice": "Enjoy the journey and stay flexible with your schedule."}
+                ]
+
             # Normalize: map "days" -> "itinerary_daily" for frontend compatibility
             if "days" in data:
                 data["itinerary_daily"] = data.pop("days")
@@ -372,6 +380,13 @@ Generate the modified complete itinerary JSON:"""
                 data = json.loads(cleaned)
             except json.JSONDecodeError:
                 data = json.loads(self._repair_json_string(cleaned))
+
+            # Ensure interest_highlights is never empty
+            if not data.get("interest_highlights"):
+                fallback_category = user_interests[0] if user_interests else "general"
+                data["interest_highlights"] = [
+                    {"category": fallback_category, "advice": "Enjoy the journey and stay flexible with your schedule."}
+                ]
 
             if "days" in data:
                 data["itinerary_daily"] = data.pop("days")

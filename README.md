@@ -1,254 +1,216 @@
-# AI Roadtrip Genie 🚗🏔️
+# AI Roadtrip Genie
 
-> 按次收费 ($12.99) 的高端 AI 自驾路书平台
-> **硬核物流保障** + **户外深度体验** + **地质科学解读**
-
----
-
-## 📋 项目概述
-
-AI Roadtrip Genie 是一个提供"专家领队级"确定性的自驾路线定制平台。核心竞争力在于将**自驾物流、硬核户外探索与自然科学科普**深度结合，解决用户在行程规划、安全保障与深度体验上的痛点。
-
-### 核心特色（三轴驱动）
-
-#### A. 硬核物流保障 (Hardcore Logistics)
-- ✅ 车型适配与通过性评估（如 Mazda CX-50）
-- ✅ 季节安全预警（雪链、黑冰、野生动物）
-- ✅ 精准预算计算（含 10% 预备金）
-- ✅ 加油站、住宿点精确坐标
-
-#### B. 体力探索：户外运动 (Physical Discovery)
-- ✅ 徒步/攀岩难度等级（Class 1-5）
-- ✅ 累计升降、预计耗时、地形描述
-- ✅ 专业装备检查清单
-
-#### C. 脑力探索：科学叙事 (Intellectual Discovery)
-- ✅ 地质学、生态学、天文学科学解释
-- ✅ 科学观测点标记
-- ✅ "边走边学"的深度价值
+> Premium AI-powered road trip itinerary platform — $12.99 per itinerary
+> **Hardcore Logistics** + **Outdoor Adventure** + **Geological Insights**
 
 ---
 
-## 🏗️ 项目架构
+## Overview
+
+AI Roadtrip Genie delivers expert-level road trip planning with the confidence of a professional expedition leader. The platform deeply integrates **vehicle logistics, outdoor exploration, and natural science education** to solve real pain points in trip planning, safety, and immersive experience.
+
+### Core Pillars (Three-Axis Design)
+
+#### A. Hardcore Logistics
+- Vehicle class assessment with drivetrain and clearance recommendations
+- Seasonal safety advisories (snow chains, black ice, wildlife hazards)
+- Precision budgeting with mandatory 10% buffer fund (risk reserve)
+- Fuel stops and accommodation waypoints with GPS coordinates
+
+#### B. Physical Discovery (Outdoor Activities)
+- Trail difficulty ratings (Class 1-5) with elevation gain and estimated duration
+- Dynamic activity matching based on user interests (skiing, bouldering, etc.)
+- Professional gear checklists
+
+#### C. Intellectual Discovery (Scientific Narrative)
+- Geological, ecological, and astronomical insights for every major landmark
+- Science observation points marked along the route
+- "Learn while you drive" deep-value content
+
+---
+
+## Architecture
 
 ```
 ai-roadtrip-genie/
-├── CLAUDE.md                 # 项目宪法（开发规范）
-├── backend/                  # FastAPI 后端
-│   ├── main.py              # 应用入口
+├── CLAUDE.md                 # Project constitution (dev guidelines)
+├── backend/                  # FastAPI backend
+│   ├── main.py              # Application entry point
 │   ├── app/
-│   │   ├── core/            # 配置与数据库
-│   │   ├── models/          # Pydantic 数据模型
-│   │   ├── routes/          # API 路由
-│   │   └── services/        # 业务逻辑（含黄金样板）
-│   └── requirements.txt     # Python 依赖
-└── frontend/                # Next.js 前端
+│   │   ├── core/            # Configuration & database
+│   │   ├── models/          # Pydantic data models
+│   │   ├── routes/          # API endpoints
+│   │   └── services/        # Business logic & AI integration
+│   └── requirements.txt     # Python dependencies
+└── frontend/                # Next.js frontend
     ├── app/
-    │   ├── page.tsx         # 首页（表单）
+    │   ├── page.tsx         # Home page (input form)
     │   └── result/
-    │       └── page.tsx     # 结果页（路书展示）
-    └── package.json         # Node 依赖
+    │       └── page.tsx     # Result page (itinerary display)
+    └── package.json         # Node dependencies
 ```
 
 ---
 
-## 🚀 快速开始
+## Quick Start
 
-### 前置要求
+### Prerequisites
 - Python 3.11+
 - Node.js 18+
-- PostgreSQL 14+ (可选，暂时使用 Mock 数据)
+- PostgreSQL 14+ (optional — works without it during development)
 
-### 1. 后端启动
+### 1. Backend Setup
 
 ```bash
-# 进入后端目录
 cd backend
 
-# 创建虚拟环境
+# Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 
-# 启动服务
+# Configure environment
+cp .env.example .env
+# Edit .env with your GEMINI_API_KEY
+
+# Start server
 python main.py
 ```
 
-**后端服务**: http://localhost:8000
-**API 文档**: http://localhost:8000/api/docs
+**Backend**: http://localhost:8000
+**API Docs**: http://localhost:8000/docs
 
-### 2. 前端启动
+### 2. Frontend Setup
 
 ```bash
-# 进入前端目录
 cd frontend
 
-# 安装依赖
+# Install dependencies
 npm install
-# 或 yarn install
 
-# 启动开发服务器
+# Configure environment
+cp .env.example .env.local
+
+# Start dev server
 npm run dev
-# 或 yarn dev
 ```
 
-**前端应用**: http://localhost:3000
+**Frontend**: http://localhost:3000
 
 ---
 
-## 🎨 设计规范
+## Tech Stack
 
-### 视觉风格
-- **灵感来源**: Arc'teryx、National Geographic
-- **配色方案**:
-  - 背景：深碳色 `#1A1A1A`
-  - 文字：米白色 `#F5F5F0`
-  - 品牌色：森林绿 `#2D5F3F`
-- **风格定位**: 极简、硬核、高端户外感
+### Backend
+- **Framework**: FastAPI (Python 3.11+, async/await)
+- **AI Engine**: Google Gemini 2.5 Flash (structured JSON output)
+- **Validation**: Pydantic v2
+- **Database**: PostgreSQL + SQLAlchemy (async)
+- **Payment**: Stripe API (Checkout mode)
+- **PDF Export**: WeasyPrint
 
-### 技术栈
+### Frontend
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Charts**: Recharts (budget pie chart)
+- **Maps**: Leaflet + React Leaflet
+- **Icons**: Lucide React
 
-#### 后端 (Backend)
-- **框架**: FastAPI (Python 3.11+)
-- **数据库**: PostgreSQL + SQLAlchemy (异步)
-- **支付**: Stripe API
-- **导出**: WeasyPrint (PDF 生成)
-- **验证**: Pydantic Models
-
-#### 前端 (Frontend)
-- **框架**: Next.js 14 (App Router)
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **动画**: Framer Motion
-- **图表**: Recharts
-- **图标**: Lucide React
-- **Markdown**: React Markdown
+### Design
+- **Inspiration**: Arc'teryx, National Geographic
+- **Palette**: Carbon dark `#1A1A1A`, Off-white `#F5F5F0`, Forest green `#2D5F3F`
+- **Style**: Minimalist, premium, outdoor aesthetic
 
 ---
 
-## 📂 核心文件说明
+## API Endpoints
 
-### 后端关键文件
-
-| 文件 | 说明 |
-|------|------|
-| `backend/main.py` | FastAPI 应用入口，路由注册 |
-| `backend/app/core/config.py` | Pydantic Settings 配置管理 |
-| `backend/app/models/itinerary.py` | 路线模型（包含三轴驱动原则） |
-| `backend/app/services/itinerary_service.py` | 黄金样板数据生成逻辑 |
-| `backend/.env` | 环境变量配置（Stripe、数据库） |
-
-### 前端关键文件
-
-| 文件 | 说明 |
-|------|------|
-| `frontend/app/page.tsx` | 首页（表单、加载动画） |
-| `frontend/app/result/page.tsx` | 结果页（路书、侧边栏） |
-| `frontend/app/globals.css` | 全局样式（Markdown、品牌色） |
-| `frontend/tailwind.config.ts` | Tailwind 自定义配置 |
-
----
-
-## 🌟 黄金样板数据
-
-### 示例路线：俄勒冈州 7 天深度探索
-
-**目的地**: Portland → Columbia River Gorge → Mt. Hood → Bend → Smith Rock → Crater Lake
-
-**核心亮点**:
-- 📍 **距离**: 1247.5 km | **驾驶时间**: 18.5 小时
-- 💰 **总预算**: $2,494.20 (含 10% 预备金)
-- 🚗 **车型**: Mazda CX-50 专属建议
-- 🧗 **活动**: Smith Rock Monkey Face 攀岩 (5.8-5.12a)
-- 🔬 **科学**: 哥伦比亚河玄武岩、火山凝灰岩、Crater Lake 形成
-
----
-
-## 🔌 API 接口
-
-### 生成路书
+### Generate Itinerary
 ```http
-POST http://localhost:8000/api/itinerary/generate
+POST /api/itinerary/generate
 Content-Type: application/json
 
 {
-  "start_location": "Portland, OR",
-  "end_location": "Crater Lake, OR",
-  "trip_duration": 7,
-  "start_date": "2024-02-15",
-  "vehicle_type": "crossover",
-  "vehicle_model": "Mazda CX-50",
-  "interests": ["hiking", "geology", "climbing"],
-  "activity_level": "challenging",
-  "include_offroad": true,
-  "scientific_depth": true
+  "start_location": "Seattle, WA",
+  "end_location": "Yellowstone National Park",
+  "trip_duration": 5,
+  "start_date": "2025-06-15",
+  "number_of_persons": 2,
+  "is_round_trip": true,
+  "vehicle_type": "suv",
+  "interests": ["photography", "geology", "hiking"],
+  "activity_level": "moderate",
+  "include_offroad": false
 }
 ```
 
-**响应示例**: 包含完整的 Markdown 路书、物流数据、预算明细、科学观测点等。
+### Refine Itinerary
+```http
+POST /api/itinerary/refine
+Content-Type: application/json
 
----
-
-## 📝 开发规范
-
-### 语言策略
-- **中文**: 业务逻辑、文档说明、用户交互
-- **英文**: 代码注释、Git Commit、变量命名
-
-### Git Commit 规范
-```
-feat: 添加路线生成功能
-fix: 修复预算计算错误
-style: 调整首页样式
-refactor: 重构数据库连接逻辑
-docs: 更新 README
+{
+  "current_itinerary": { ... },
+  "refinement_request": "Add more photography stops and reduce budget to $800"
+}
 ```
 
-### 开发流程
-1. 重大架构调整前，先提供 Plan 供确认
-2. 代码体现专业性与安全性（为 H-1B 资质证明提供支撑）
-3. 遵循 CLAUDE.md 项目宪法
+### Health Check
+```http
+GET /api/health
+```
 
 ---
 
-## 🛠️ 技术债务 & 待办事项
+## Key Features
 
-### 后端
-- [ ] 接入 Anthropic Claude API 替换 Mock 数据
-- [ ] 配置 PostgreSQL 数据库持久化
-- [ ] 安装 WeasyPrint 系统依赖（PDF 导出）
-- [ ] 完善 Stripe Webhook 处理逻辑
-- [ ] 添加用户认证系统
-
-### 前端
-- [ ] 移动端响应式优化
-- [ ] 支付流程集成（Stripe Checkout）
-- [ ] PDF 下载功能
-- [ ] 历史路书管理
-- [ ] SEO 优化
+| Feature | Description |
+|---------|-------------|
+| Morning/Afternoon/Evening Structure | Each day is split into 3 time blocks with tailored activities |
+| Universal Photography Guide | Camera settings (f-stop, ISO, shutter) for golden hour — no brand names |
+| Scaled Budgeting | Fixed costs (fuel, tolls) + variable costs scaled by traveler count |
+| 10% Buffer Fund | Mandatory risk reserve automatically calculated |
+| Interactive Route Map | Leaflet map with numbered markers, polyline route, round-trip support |
+| Genie Assistant | In-app AI refinement dialog to adjust the itinerary post-generation |
+| Booking Integration | Direct search links to Booking.com and Viator for accommodation and tours |
 
 ---
 
-## 🎯 商业模式
+## Roadmap
 
-- **定价**: $12.99 / 次（一次性购买，终身访问）
-- **支付**: Stripe Checkout 模式
-- **交付**: 结构化 Markdown + 出版级 PDF 路书
-- **目标用户**: 追求品质自驾体验的高端用户
+### Backend
+- [ ] PostgreSQL database persistence
+- [ ] WeasyPrint PDF export (system dependencies)
+- [ ] Stripe Checkout payment flow
+- [ ] User authentication system
+- [ ] Rate limiting and caching
+
+### Frontend
+- [ ] Mobile responsive optimization
+- [ ] Payment integration (Stripe Checkout)
+- [ ] PDF download functionality
+- [ ] Itinerary history management
+- [ ] SEO optimization
 
 ---
 
-## 📄 License
+## Business Model
+
+- **Pricing**: $12.99 per itinerary (one-time purchase, lifetime access)
+- **Payment**: Stripe Checkout
+- **Deliverable**: Structured itinerary + publication-quality PDF
+- **Target**: Quality-conscious travelers seeking premium expedition planning
+
+---
+
+## License
 
 Proprietary - All Rights Reserved
 
 ---
 
-## 🙏 致谢
-
-本项目由 **Claude Sonnet 4.5** 驱动，严格遵循 CLAUDE.md 项目宪法规范，提供专家级路线设计与科学解读。
-
-**✨ 由 AI Roadtrip Genie 倾情打造**
-**专家级路线设计 | $12.99 一次性购买 | 终身访问**
+Built with Google Gemini 2.5 Flash | Expert Expedition Planning | $12.99 per itinerary

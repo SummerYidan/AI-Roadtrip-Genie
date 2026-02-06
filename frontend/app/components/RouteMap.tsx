@@ -72,7 +72,7 @@ export default function RouteMap({
   if (!mounted) {
     return (
       <div className="w-full h-96 bg-carbon-light rounded-lg flex items-center justify-center">
-        <p className="text-off-white/50">加载地图中...</p>
+        <p className="text-off-white/50">Loading map...</p>
       </div>
     )
   }
@@ -194,17 +194,17 @@ export default function RouteMap({
                   {typeIconMap[marker.type] || '📍'} {marker.name}
                 </p>
                 <p className="text-xs text-gray-500 mb-2">
-                  站点 #{marker.sequence} · {marker.type}
+                  Stop #{marker.sequence} · {marker.type}
                 </p>
                 {marker.scientific_explanation && (
                   <div className="mt-2 pt-2 border-t border-gray-200">
-                    <p className="font-semibold text-xs text-blue-600">科学解释:</p>
+                    <p className="font-semibold text-xs text-blue-600">Scientific Insight:</p>
                     <p className="text-xs mt-1">{marker.scientific_explanation}</p>
                   </div>
                 )}
                 {marker.observation_tips && (
                   <div className="mt-2">
-                    <p className="font-semibold text-xs text-green-600">观测技巧:</p>
+                    <p className="font-semibold text-xs text-green-600">Observation Tips:</p>
                     <p className="text-xs mt-1">{marker.observation_tips}</p>
                   </div>
                 )}
@@ -222,7 +222,7 @@ export default function RouteMap({
           >
             <Popup>
               <div className="text-sm">
-                <p className="font-semibold text-red-600">⛽ 加油站</p>
+                <p className="font-semibold text-red-600">⛽ Fuel Stop</p>
                 <p>{stop.location}</p>
               </div>
             </Popup>
