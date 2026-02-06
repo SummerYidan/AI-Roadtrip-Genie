@@ -1,0 +1,12 @@
+{
+  "start_location": "Portland, OR",
+  "end_location": "Crater Lake, OR",
+  "trip_duration": 3,
+  "start_date": "2026-06-15",
+  "vehicle_type": "suv",
+  "vehicle_model": "Mazda CX-50",
+  "interests": ["geology", "photography"],
+  "activity_level": "moderate",
+  "include_offroad": false,
+  "scientific_depth": true
+}
