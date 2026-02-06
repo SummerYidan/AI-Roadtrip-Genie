@@ -1,6 +1,6 @@
 """
 AI Roadtrip Genie - FastAPI Backend Entry Point
-V2.3.1 - Fixed CORS configuration
+V3.0 - Lightweight deployment (no database, no payment)
 """
 import os
 from fastapi import FastAPI
@@ -8,16 +8,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.core.config import settings
-from app.routes import health, itinerary, payment
+from app.routes import health, itinerary
 
 
-# Hardcoded CORS origins - clean Python list (no env parsing issues)
+# CORS origins - add your Vercel deployment URL when deployed
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-    # Add your Vercel deployment URL here when deployed:
     # "https://your-app.vercel.app",
 ]
 
@@ -26,7 +25,7 @@ ALLOWED_ORIGINS = [
 async def lifespan(app: FastAPI):
     """Application lifespan manager"""
     print("=" * 60)
-    print("AI Roadtrip Genie Backend v2.3.1")
+    print("AI Roadtrip Genie Backend v3.0")
     print("=" * 60)
     print(f"Environment: {settings.ENVIRONMENT}")
     print(f"Port: {settings.PORT}")
@@ -39,18 +38,16 @@ async def lifespan(app: FastAPI):
     print("Backend Shutdown Complete")
 
 
-# Initialize FastAPI application
 app = FastAPI(
     title="AI Roadtrip Genie API",
     description="Premium AI-powered roadtrip itinerary generator with hardcore logistics & scientific insights",
-    version="2.3.1",
-    docs_url="/docs",      # Swagger UI at /docs
-    redoc_url="/redoc",    # ReDoc at /redoc
+    version="3.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
     openapi_url="/openapi.json",
     lifespan=lifespan
 )
 
-# Configure CORS with clean hardcoded list
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
@@ -59,10 +56,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routes
+# Register routes (no payment/database for initial launch)
 app.include_router(health.router, prefix="/api/health", tags=["Health"])
 app.include_router(itinerary.router, prefix="/api/itinerary", tags=["Itinerary"])
-app.include_router(payment.router, prefix="/api/payment", tags=["Payment"])
 
 
 @app.get("/")
@@ -70,10 +66,9 @@ async def root():
     """Root endpoint - API health check"""
     return {
         "service": "AI Roadtrip Genie",
-        "version": "2.3.1",
+        "version": "3.0.0",
         "status": "operational",
         "docs": "/docs",
-        "api_docs": "/docs",
         "environment": settings.ENVIRONMENT
     }
 
@@ -83,7 +78,7 @@ async def api_root():
     """API root endpoint"""
     return {
         "message": "AI Roadtrip Genie API",
-        "version": "2.3.1",
+        "version": "3.0.0",
         "endpoints": {
             "health": "/api/health",
             "generate": "/api/itinerary/generate",
